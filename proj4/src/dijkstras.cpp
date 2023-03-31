@@ -1,6 +1,8 @@
 //Grant Alderson and Sam Cradock
-//Citation: https://www.techiedelight.com/find-shortest-path-source-destination-matrix-satisfies-given-constraints/ and planks notes
-//This program finds the shortest path for a runner using dijkstras alorithm
+//Citation:https://www.geeksforgeeks.org/minimum-cost-path-left-right-bottom-moves-allowed/ 
+//https://www.techiedelight.com/find-shortest-path-source-destination-matrix-satisfies-given-constraints/ 
+//and planks notes
+//This program finds the shortest path for a runner using dijkstras algorithm
 
 
 #include<vector>
@@ -17,9 +19,12 @@ struct Node{
 	int tile_weight;//weight of current node
 	pair<int,int> node1;//current node
 	pair<int,int> node2;//node before
-	bool const operator<( Node x)const {
+
+
+	bool const operator<(Node x)const {
 		return tile_weight>x.tile_weight;
 	}
+
 }; 
 
 
@@ -31,7 +36,7 @@ int main(int argc, char *argv[]){
 	char tile;
 	map<char, int> weight;
 	priority_queue<Node> cpath;
-	int dist;
+	int dist=0;
     int numtiles, tilenum;
 	map<pair<int,int>,pair<int,int>> edges;//edges between the nodes in the struct
 	cin >> numtiles;
@@ -48,23 +53,23 @@ int main(int argc, char *argv[]){
 			board[i][j]=weight[input];
 		}
 	}
-	Node v;
+	Node n;
 	cin >>startx>> starty;
 	cin >>destx>> desty;
-	cpath.push({0, {destx,desty},{destx,desty}});
+	cpath.push({dist, {destx,desty},{destx,desty}});
 
 	while(!cpath.empty()){//loop until struct is empty
-		v = cpath.top();
+		n = cpath.top();
 		cpath.pop();//pop top node
-		if((edges.count(v.node1))){//if edge is not already in map
+		if((edges.count(n.node1))){//if edge is not already in map
 			continue;
 		}else{
-			edges[v.node1]=v.node2;//place edge into map
-			dist=v.tile_weight;//update weight
-			if(v.node1.first == startx && v.node1.second == starty){//checks if at starting node
+			edges[n.node1]=n.node2;//place edge into map
+			dist=n.tile_weight;//update weight
+			if(n.node1.first == startx && n.node1.second == starty){//checks if at starting node
 
 				cout <<dist<<endl;//print
-				pair<int, int> temp = v.node1;
+				pair<int, int> temp = n.node1;
 				while(temp.first!=destx||temp.second !=desty){
 					cout << temp.first<< " " <<temp.second << endl;
 					temp=edges[temp];
@@ -76,19 +81,19 @@ int main(int argc, char *argv[]){
 			}
 		}
 
-		int x=v.node1.first;
-		int y=v.node1.second;
+		int x=n.node1.first;
+		int y=n.node1.second;
 		if((y+1)<sizey){//check up
-			cpath.push({v.tile_weight+board[x][y+1],{x, y+1},{x, y}});
+			cpath.push({n.tile_weight+board[x][y+1],{x, y+1},{x, y}});
 		}
 		if((y-1)>-1){//check down
-			cpath.push({v.tile_weight+board[x][y-1],{x, y-1},{x, y}});
+			cpath.push({n.tile_weight+board[x][y-1],{x, y-1},{x, y}});
 		} 
 		if((x+1) < sizex){//check right
-			cpath.push({v.tile_weight+board[x+1][y],{x+1, y},{x, y}}); 
+			cpath.push({n.tile_weight+board[x+1][y],{x+1, y},{x, y}}); 
 		}
 		if((x-1) >-1){//check left
-			cpath.push({v.tile_weight+board[x-1][y],{x-1, y},{x, y}});
+			cpath.push({n.tile_weight+board[x-1][y],{x-1, y},{x, y}});
 		}
 
 

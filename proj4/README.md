@@ -32,7 +32,7 @@ benchmark
 
 | N             | Elapsed Time  | Memory Usage   |
 |---------------|---------------|----------------|
-| 10            | ...           | ...            |
+| 10            | .02           | 91,964         |
 | 20            | ...           | ...            |
 | 50            | ...           | ...            |
 | 100           | ...           | ...            |
@@ -42,9 +42,8 @@ benchmark
 |---------------|---------------|----------------|
 Grant Alderson Summary:I worked on dijkstras.cpp and answering the questions for the README.md
 
-1. The graph is represented by a 2d array that holds that chars on the grid.
-The chars and their values are stored in a map with the chars being the keys and the
-value being their weight.
+1. The graph is represented by a 2d array that holds the ints that each char represents on the grid.
+
 2. according to geeksfor geeks insertion into a priority queue is log n and we do it E times do it id ElogV.
 
 

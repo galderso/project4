@@ -17,33 +17,35 @@ struct Node{
 	int tile_weight;//weight of current node
 	pair<int,int> node1;//current node
 	pair<int,int> node2;//node before
-	bool const operator<( Node a)const {
-		return a.tile_weight<tile_weight;
+	bool const operator<( Node x)const {
+		return tile_weight>x.tile_weight;
 	}
 }; 
 
 
 int main(int argc, char *argv[]){
-	int numtiles, tilenum;
+	
 	int sizex,sizey;
 	int startx,starty;
 	int destx,desty;
-	string tile;
-	map<string, int> weight;
+	char tile;
+	map<char, int> weight;
 	priority_queue<Node> cpath;
-	int dist=0;
+	int dist;
+    int numtiles, tilenum;
 	map<pair<int,int>,pair<int,int>> edges;//edges between the nodes in the struct
 	cin >> numtiles;
-	for(int i=0; i < numtiles; i++){//takes chars and their weights
+	for(int i=0;i<numtiles; i++){//takes chars and their weights
 		cin >>tile >> tilenum;
-		weight[tile] = tilenum;
+		weight[tile]= tilenum;
 	}
 	cin >>sizex >>sizey;
-	string board[sizex][sizey];
+	char input;
+	int board[sizex][sizey];
 	for(int i=0; i < sizex; i++){//creates the board
 		for(int j=0; j<sizey; j++){
-			cin >> board[i][j];
-
+			cin>>input;
+			board[i][j]=weight[input];
 		}
 	}
 	Node v;
@@ -51,45 +53,46 @@ int main(int argc, char *argv[]){
 	cin >>destx>> desty;
 	cpath.push({0, {destx,desty},{destx,desty}});
 
-	while(cpath.size()!=0){//loop until struct is empty
+	while(!cpath.empty()){//loop until struct is empty
 		v = cpath.top();
 		cpath.pop();//pop top node
 		if((edges.count(v.node1))){//if edge is not already in map
 			continue;
 		}else{
-		edges[v.node1] = v.node2;//place edge into map
-		dist=v.tile_weight;//update weight
-		if(v.node1.first == startx && v.node1.second == starty){//checks if at starting node
-			break;  
+			edges[v.node1]=v.node2;//place edge into map
+			dist=v.tile_weight;//update weight
+			if(v.node1.first == startx && v.node1.second == starty){//checks if at starting node
 
+				cout <<dist<<endl;//print
+				pair<int, int> temp = v.node1;
+				while(temp.first!=destx||temp.second !=desty){
+					cout << temp.first<< " " <<temp.second << endl;
+					temp=edges[temp];
+				}
+				cout << temp.first<<" " <<temp.second << endl;
+
+				return 0;
+
+			}
 		}
-		}
-		
+
 		int x=v.node1.first;
 		int y=v.node1.second;
-		if((y+1) < sizey){//check up
-			cpath.push({v.tile_weight+weight[board[x][y+1]],{x, y+1},{x, y}});
+		if((y+1)<sizey){//check up
+			cpath.push({v.tile_weight+board[x][y+1],{x, y+1},{x, y}});
 		}
 		if((y-1)>-1){//check down
-			cpath.push({v.tile_weight+weight[board[x][y-1]],{x, y-1},{x, y}});
+			cpath.push({v.tile_weight+board[x][y-1],{x, y-1},{x, y}});
 		} 
 		if((x+1) < sizex){//check right
-			cpath.push({v.tile_weight+weight[board[x+1][y]],{x+1, y},{x, y}}); 
+			cpath.push({v.tile_weight+board[x+1][y],{x+1, y},{x, y}}); 
 		}
 		if((x-1) >-1){//check left
-			cpath.push({v.tile_weight+weight[board[x-1][y]],{x-1, y},{x, y}});
+			cpath.push({v.tile_weight+board[x-1][y],{x-1, y},{x, y}});
 		}
 
 
-	}   
-
-	cout <<dist<<endl;//print
-	pair<int, int> temp = v.node1;
-	while(temp.first !=destx||temp.second !=desty){
-		cout << temp.first<< " " <<temp.second << endl;
-		temp = edges[temp];
 	}
-	cout << temp.first<<" " <<temp.second << endl;
-
+	return 0;
 }
 

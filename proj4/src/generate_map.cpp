@@ -11,7 +11,7 @@ using namespace std;
 
 int main(int argc, char *argv[]){
 	int N = 0; //N used for NxN graph
-	int mapNum = 0; //which map we're writing to, increments
+	int mapNum = 10; //which map we're writing to, increments
 	char space; //tile character
 	srand((unsigned) time(NULL)); //seed for rand()
 	while(cin >> N){ 

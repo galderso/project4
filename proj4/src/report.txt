@@ -1,0 +1,9 @@
+Grant Alderson Summary:I worked on dijkstras.cpp and answering the questions for the README.md and the markdown table.
+
+1. The graph is represented by a 2d array that holds the ints that each char represents on the grid.The map called edges 
+holds the relationship between the different nodes in the struct 
+
+2. According to geeksfor geeks insertion into a priority queue is log n and we do it E times do it id ElogV.
+
+3. With the increase in N and from the graph aboce we can see that this implementation of dijkstras is very inefficient as the numbers get higher. It us
+es way to much memory to be practical, this is likely because of the way it was implemented.

@@ -1,4 +1,5 @@
 //This program takes in an int value N and creates a random NxN graph that can be used for 
+//
 //The dijkstras.cpp file. It does this by creating seperate map#.txt files for each different
 //map and using a switch to make a space equal to only f,g,G,h,m or r.
 
@@ -20,6 +21,8 @@ int main(int argc, char *argv[]){
 		string filename = ss.str(); //will generate map0-6.txt
 		ofstream mapFile;
 		mapFile.open(filename);
+		
+		mapFile<<"6\nf 3\ng 1\nG 2\nh 4\nm 7\nr 5\n"<< N << ' ' << N << '\n';
 		for(int i = 0; i < N; i++){
 			if(i >0){
 				mapFile << "\n"; //add a newspace each time we iterate
@@ -50,6 +53,7 @@ int main(int argc, char *argv[]){
 			}
 		}
 		mapNum++;
+		mapFile << "\n"<<"0 0\n" << N- 1 << ' ' << N - 1 << '\n';
 		mapFile.close();
 	}
 	return 0;

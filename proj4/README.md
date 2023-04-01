@@ -28,22 +28,22 @@ Output
     Cost
     [(ROW_0, COL_0), ...]
 
-benchmark
+benchmark by Grant Alderson and Sam Cradock
 
 | N             | Elapsed Time  | Memory Usage   |
 |---------------|---------------|----------------|
-| 10            | .02           | 91,964         |
-| 20            | ...           | ...            |
-| 50            | ...           | ...            |
-| 100           | ...           | ...            |
-| 200           | ...           | ...            |
-| 500           | ...           | ...            |
-| 1000          | ...           | ...            |
+| 10            | .00           | 91,964         |
+| 20            | .00           | 111,580        |
+| 50            | .01           | 222,620        |
+| 100           | .04           | 603,100        |
+| 200           | .19           | 2,084,060      |
+| 500           | 1.36          | 12,245,932     |
+| 1000          | 6.08          | 48,737,164     |
 |---------------|---------------|----------------|
-Grant Alderson Summary:I worked on dijkstras.cpp and answering the questions for the README.md
+
 
 1. The graph is represented by a 2d array that holds the ints that each char represents on the grid.
 
-2. according to geeksfor geeks insertion into a priority queue is log n and we do it E times do it id ElogV.
+2. According to geeksfor geeks insertion into a priority queue is log n and we do it E times do it id ElogV.
 
-
+3. With the increase in N and from the graph aboce we can see that this implementation of dijkstras is very inefficient as the numbers get higher. It uses way to much memory to be practical, this is likely because of the way it was implemented.
